@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Pension Dashboard</title>
+    <!-- plugins:css -->
+    <!-- <link rel="stylesheet" href="assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css"> -->
+    <!-- <link rel="stylesheet" href="assets/vendors/iconfonts/ionicons/dist/css/ionicons.css"> -->
+    <!-- <link rel="stylesheet" href="assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css"> -->
+    <!-- <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css"> -->
+    <!-- <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.addons.css"> -->
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="assets/css/shared/style.css">
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="assets/css/demo_1/style.css">
+    <!-- End Layout styles -->
+    <link rel="shortcut icon" href="" />
+
+
+    <title>Pension Graph</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+
+    <!-- Load jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  
+    <!-- Load Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+
+    <!-- Load PapaParse to read csv files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.1.0/papaparse.min.js"></script>
+
+
+
+
+
+  </head>
+
+
+
+  <script>
+    function favTutorial() {
+    var mylist = document.getElementById("myList");
+    document.getElementById("favourite").value = mylist.options[mylist.selectedIndex].text;
+    }
+    </script>
+
+
+
+  <body>
+    <div class="container-scroller">
+      <!-- partial:partials/_navbar.html -->
+      <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
+          <a class="navbar-brand brand-logo" href="index.html">
+            <img src="Indian_Railway_Logo_2.png" alt="" /> </a> <!-- <Star admin logo images> -->
+            
+          <a class="navbar-brand brand-logo-mini" href="index.html">
+            <img src="" alt="logo" /> </a>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-center">
+          <ul class="navbar-nav">
+            <li class="nav-item font-weight-semibold d-none d-lg-block"></li>
+            <li class="nav-item dropdown language-dropdown">
+              <a class="nav-link dropdown-toggle px-2 d-flex align-items-center" id="LanguageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                <div class="d-inline-flex mr-0 mr-md-3">
+                  <div class="flag-icon-holder">
+                    <i class="flag-icon flag-icon-india"></i>
+                  </div>
+                </div>
+                <span class="profile-text font-weight-medium d-none d-md-block">English</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-left navbar-dropdown py-2" aria-labelledby="LanguageDropdown">
+                <a class="dropdown-item">
+                  <div class="flag-icon-holder">
+                    <i class="flag-icon flag-icon-india"></i>
+                  </div>English
+                </a>
+
+              </div>
+            </li>
+          </ul>
+        
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link count-indicator" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                <i class="mdi mdi-bell-outline"></i>
+                <span class="count"></span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="messageDropdown">
+                <a class="dropdown-item py-3">
+                  <p class="mb-0 font-weight-medium float-left"> </p>
+                  <span class="badge badge-pill badge-primary float-right">View all</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <img src="Indian_Railway_Logo_2.png" alt="" class="img-sm profile-pic">
+                  </div>
+                  <div class="preview-item-content flex-grow py-2">
+                    <p class="preview-subject ellipsis font-weight-medium text-dark"> </p>
+                    <p class="font-weight-light small-text">  </p>
+                  </div>
+                </a>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <img src="" alt="image" class="img-sm profile-pic">
+                  </div>
+                  <div class="preview-item-content flex-grow py-2">
+                    <p class="preview-subject ellipsis font-weight-medium text-dark"> </p>
+                    <p class="font-weight-light small-text">  </p>
+                  </div>
+                </a>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <img src="" alt="image" class="img-sm profile-pic">
+                  </div>
+                  <div class="preview-item-content flex-grow py-2">
+                    <p class="preview-subject ellipsis font-weight-medium text-dark"> </p>
+                    <p class="font-weight-light small-text"> </p>
+                  </div>
+                </a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link count-indicator" id="notificationDropdown" href="#" data-toggle="dropdown">
+                <i class="mdi mdi-email-outline"></i>
+                <span class="count bg-success"></span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="notificationDropdown">
+                <a class="dropdown-item py-3 border-bottom">
+                  <p class="mb-0 font-weight-medium float-left"> </p>
+                  <span class="badge badge-pill badge-primary float-right">View all</span>
+                </a>
+                <a class="dropdown-item preview-item py-3">
+                  <div class="preview-thumbnail">
+                    <i class="mdi mdi-alert m-auto text-primary"></i>
+                  </div>
+                  <div class="preview-item-content">
+                    <h6 class="preview-subject font-weight-normal text-dark mb-1">Application Error</h6>
+                    <p class="font-weight-light small-text mb-0"> Just now </p>
+                  </div>
+                </a>
+                <a class="dropdown-item preview-item py-3">
+                  <div class="preview-thumbnail">
+                    <i class="mdi mdi-settings m-auto text-primary"></i>
+                  </div>
+                  <div class="preview-item-content">
+                    <h6 class="preview-subject font-weight-normal text-dark mb-1">Settings</h6>
+                    <p class="font-weight-light small-text mb-0"> Private message </p>
+                  </div>
+                </a>
+                <a class="dropdown-item preview-item py-3">
+                  <div class="preview-thumbnail">
+                    <i class="mdi mdi-airballoon m-auto text-primary"></i>
+                  </div>
+                  <div class="preview-item-content">
+                    <h6 class="preview-subject font-weight-normal text-dark mb-1">New user registration</h6>
+                    <p class="font-weight-light small-text mb-0"> 2 days ago </p>
+                  </div>
+                </a>
+              </div>
+            </li>
+            <li class="nav-item dropdown d-none d-xl-inline-block user-dropdown">
+              <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                <img class="img-xs rounded-circle" src="Indian_Railway_Logo_2.png" alt="Profile image"> </a>
+              <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+                <div class="dropdown-header text-center">
+                  <img class="img-md rounded-circle" src="Indian_Railway_Logo_2.png" alt="Profile image">
+                  
+                </div>
+                <a class="dropdown-item">My Profile <span class="badge badge-pill badge-danger">1</span><i class="dropdown-item-icon ti-dashboard"></i></a>
+                <a class="dropdown-item">Messages<i class="dropdown-item-icon ti-comment-alt"></i></a>
+                <a class="dropdown-item">Activity<i class="dropdown-item-icon ti-location-arrow"></i></a>
+                <a class="dropdown-item">FAQ<i class="dropdown-item-icon ti-help-alt"></i></a>
+                <a class="dropdown-item">Sign Out<i class="dropdown-item-icon ti-power-off"></i></a>
+              </div>
+            </li>
+          </ul>
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+            <span class="mdi mdi-menu"></span>
+          </button>
+        </div>
+      </nav>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+          <ul class="nav">
+            <li class="nav-item nav-profile">
+              <a href="#" class="nav-link">
+                <div class="profile-image">
+                  <img class="img-xs rounded-circle" src="Indian_Railway_Logo_2.png" alt="">
+                  <div class="dot-indicator bg-success"></div>
+                </div>
+              </a>
+            </li>
+            <li class="nav-item nav-category">Main Menu</li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">
+                <i class="menu-icon typcn typcn-document-text"></i>
+                <span class="menu-title">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Revision_cpc.html">
+                <i class="menu-icon typcn typcn-user-outline"></i>
+                <span class="menu-title">Administrations</span>
+              </a>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                <i class="menu-icon typcn typcn-coffee"></i>
+                <span class="menu-title">Pension</span>
+                <i class="menu-arrow"></i>
+              </a>
+              <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item">
+                    <a class="nav-link" href="index.html">Normal Retirement</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="basic_elements.html">ONR Cases</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="Regrant_Cases.html">Regrant Cases</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="Revision_cpc.html">Revision-cpc</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="Nps_Cases.html">NPS Cases(Death)</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="pension.html">Pension suspense</a>
+                  </li>
+                
+                </ul>
+              </div>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                <i class="menu-icon typcn typcn-coffee"></i>
+                <span class="menu-title">Efficiency</span>
+                <i class="menu-arrow"></i>
+              </a>
+              <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item">
+                    <a class="nav-link" href="MPR.html">MPR</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="pcdo.html">PCDO</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="https://1drv.ms/p/s!Ausf_BgOq5otgQAiGnz8t8rhEEhd?e=uGrbGq">PPT</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="https://1drv.ms/w/s!Ausf_BgOq5otbJ0NnI8TS6NL99o?e=XpYaQT">WORD</a>
+                  </li>
+                 
+                </ul>
+              </div>
+            </li>
+            
+
+
+
+
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="">             <!--  pages/charts/chartjs.html --> 
+                <i class="menu-icon typcn typcn-th-large-outline"></i>
+                <span class="menu-title">Finance I</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Regrant_Cases.html">
+                <i class="menu-icon typcn typcn-bell"></i>
+                <span class="menu-title">Finance II</span>
+              </a>
+            </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                <i class="menu-icon typcn typcn-coffee"></i>
+                <span class="menu-title">Expenditure</span>
+                <i class="menu-arrow"></i>
+              </a>
+              <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item">
+                    <a class="nav-link" href="BR_DR.html">BR-DR</a>
+                  </li>
+                  
+                 
+                </ul>
+              </div>
+            </li>
+            
+            
+          
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                <i class="menu-icon typcn typcn-coffee"></i>
+                <span class="menu-title">Books</span>
+                <i class="menu-arrow"></i>
+              </a>
+              <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item">
+                    <a class="nav-link" href="planHead.html">Plan Head</a>
+                  </li>
+                  
+                 
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Regrant_Cases.html">
+                <i class="menu-icon typcn typcn-bell"></i>
+                <span class="menu-title">Establishment</span>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="Regrant_Cases.html">
+                <i class="menu-icon typcn typcn-bell"></i>
+                <span class="menu-title">Provident fund</span>
+              </a>
+            </li>
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="Regrant_Cases.html">
+                <i class="menu-icon typcn typcn-bell"></i>
+                <span class="menu-title">Record</span>
+              </a>
+            </li>
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="Regrant_Cases.html">
+                <i class="menu-icon typcn typcn-bell"></i>
+                <span class="menu-title">ISA Branch</span>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="Regrant_Cases.html">
+                <i class="menu-icon typcn typcn-bell"></i>
+                <span class="menu-title">NPS</span>
+              </a>
+            </li>
+
+
+
+
+           
+            
+          </ul>
+        </nav>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <!-- Page Title Header Starts-->
+            <div class="row page-title-header">
+              <div class="col-12">
+                <div class="page-header">
+                  <h4 class="page-title">Dashboard</h4>
+                  <div class="quick-link-wrapper w-100 d-md-flex flex-md-wrap">
+                   </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="page-header-toolbar">
+                  <div class="btn-group toolbar-item" role="group" aria-label="Basic example">
+                  </div>
+                   </div>
+                 </div>
+              </div>
+            </div>
+            <!-- Page Title Header Ends-->
+
+              <div class="row">
+              <div class="col-md-8 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+
+
+
+                    <div class="d-flex align-items-center justify-content-between w-100">
+                      <p class="mb-0"></p>
+                      <div class="dropdown">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dateSorter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select Year</button>
+                        <div class="dropdown-menu" aria-labelledby="dateSorter">
+                          <div class="dropdown-item" id="market-overview_1">2020</div>
+                          <div class="dropdown-item" id="market-overview_2">2021</div>
+                          <div class="dropdown-item" id="market-overview_3">2022</div>
+                          <div class="dropdown-item" id="market-overview_3">2023</div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <h4 class="card-title mb-0">Normal Retirement Data</h4>
+                    <div class="d-flex flex-column flex-lg-row">
+                      <p></p>
+                      <ul class="nav nav-tabs sales-mini-tabs ml-lg-auto mb-4 mb-md-0" role="tablist">
+                        <li class="nav-item">
+                          <a class="nav-link active" id="sales-statistics_switch_1" data-toggle="tab" role="tab" area-selected="true">1D</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" id="sales-statistics_switch_2" data-toggle="tab" role="tab" area-selected="false">5D</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" id="sales-statistics_switch_3" data-toggle="tab" role="tab" area-selected="false">1M</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" id="sales-statistics_switch_4" data-toggle="tab" role="tab" ara-selected="false">1Y</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="d-flex flex-column flex-lg-row">
+                      <div class="data-wrapper d-flex mt-2 mt-lg-0">
+                        <div class="wrapper pr-5">
+                          <h5 class="mb-0"></h5>
+                          <div class="d-flex align-items-center">
+                            <h4 class="font-weight-semibold mb-0"></h4>
+                            <small class="ml-2 text-gray d-none d-lg-block"><b></b> </small>
+                          </div>
+                           </div>
+                        <div class="wrapper">
+                          <h5 class="mb-0"></h5>
+                          <div class="d-flex align-items-center">
+                            <h4 class="font-weight-semibold mb-0"></h4>
+                            <small class="ml-2 text-gray d-none d-lg-block"><b></b></small>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="ml-lg-auto" id="sales-statistics-legend"></div>
+                    </div>
+                    <canvas class="mt-5" height="120" id="sales-statistics-overview"></canvas>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+              <div class="col-md-4 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body d-flex flex-column">
+                    <div class="wrapper">
+                      <h4 class="card-title mb-0"></h4>
+                      <p></p>
+                      <div class="mb-4" id="net-profit-legend"></div>
+                    </div>
+                    <canvas class="my-auto mx-auto" height="250" id="net-profit"></canvas>
+                  </div>
+                </div>
+              </div>
+
+
+
+              
+            </div>
+            <div class="row">
+              <div class="col-md-8">
+                <div class="row">
+                  
+
+                  
+                  
+                  <!-- dropdown code of below graph -->
+                  
+                  <div class="d-flex align-items-center justify-content-between w-100">
+                    <p class="mb-0"></p>
+                    <div class="dropdown">
+                      <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dateSorter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select Year</button>
+                      <div class="dropdown-menu" aria-labelledby="dateSorter">
+                        <div class="dropdown-item" id="market-overview_1">2020</div>
+                        <div class="dropdown-item" id="market-overview_2">2021</div>
+                        <div class="dropdown-item" id="market-overview_3">2022</div>
+                        <div class="dropdown-item" id="market-overview_3">2023</div>
+                      </div>
+                    </div>
+                  </div>
+                 
+                    <canvas id="container" style="width:100%; height:400px;"></canvas>
+                    
+                    <p style="font-family: Helvetica; color: #333; padding: 1em 2em; font-size: 10px">
+                    
+                      <br>
+    
+                     </p>
+                </div>
+              </div>
+
+
+
+
+
+              
+              <div class="col-md-4">
+                <div class="row">
+                 
+                 <div class="col-md-12 grid-margin">
+                    <div class="card">
+                      <div class="card-body">
+                        <h4 class="card-title mb-0">Additional Links</h4>
+                        <div class="d-flex py-2 border-bottom">
+                         <span class="img-sm rounded-circle by-warning text-white text-avatar"></span>
+                          <div class="wrapper ml-2">
+                            <a href="https://rtionline.gov.in/">RTI</a>
+                            <p class="mb-n1 font-weight-semibold"></p>
+                            <small></small>
+                          </div>
+                          <small class="text-muted ml-auto"></small>
+                        </div>
+                        <div class="d-flex py-2 border-bottom">
+                          <span class="img-sm rounded-circle bg-warning text-white text-avatar"></span>
+                          <div class="wrapper ml-2">
+                            <a href="https://www.w3schools.com/">Grieverance</a>
+                            <p class="mb-n1 font-weight-semibold"></p>
+                            <small></small>
+                          </div>
+                          <small class="text-muted ml-auto"></small>
+                        </div>
+                        <div class="d-flex py-2 border-bottom">
+                          <span class="img-sm rounded-circle bg-warning text-white text-avatar"></span>
+                          <div class="wrapper ml-2">
+                            <a href="https://www.google.com/">cp.</a>
+                            <p class="mb-n1 font-weight-semibold"></p>
+                            <small></small>
+                          </div>
+                          <small class="text-muted ml-auto"></small>
+                        </div>
+                        <div class="d-flex pt-2">
+                          <span class="img-sm rounded-circle bg-success text-white text-avatar"></span>
+                          <div class="wrapper ml-2">
+                            <p class="mb-n1 font-weight-semibold"></p>
+                            <small></small>
+                          </div>
+                          <small class="text-muted ml-auto"></small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <!-- main-panel ends -->
+      </div>
+
+
+
+
+      <div class="col-md-12 white" style="line-height: 1.12857143; font-family: 'Arial Narrow',Arial, sans-serif;font-weight:bold;text-align:center;background-color:#5768f3;color:white!important;  ">
+
+      
+        <a class="white" style="color:white!important;text-decoration:none!important;" href="#">&nbsp;Site Map&nbsp;</a>
+        <font class="grey"> | </font>
+        <a class="white"  style="color:white!important;text-decoration:none!important;" href="#">&nbsp;Contact Us&nbsp;</a>
+        <font class="grey"> | </font>
+        <a class="white" style="color:white!important;text-decoration:none!important;" href="#">&nbsp;RTI&nbsp;</a>
+        <font class="grey"> | </font>
+        <a class="white" style="color:white!important;text-decoration:none!important;" href="#">&nbsp;Disclaimer&nbsp;</a>
+        <font class="grey"> | </font>
+        <a class="white" style="color:white!important;text-decoration:none!important;" href="#">&nbsp;Terms & Conditions&nbsp;</a>
+        
+        <font class="grey"> | </font>
+        <a class="white" style="color:white!important;text-decoration:none!important;" href="#">&nbsp;Privacy Policy&nbsp;</a>
+        
+
+        <a class="white" href="#" target="_blank" style="float:right">
+   <img style="border: 0pt none; width: 70px; height: 0px;" src="" alt="">
+<a class="black" href="" target="_blank" style="float:right"></a>
+<img style="border: 0pt none; width: 70px; height: 0px;" ></a>
+
+</br>
+        
+ 
+        <br> Developed By Accounts Department NWR &nbsp;<br>Bikaner<br>
+        
+</div>
+
+
+
+
+
+
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="assets/vendors/js/vendor.bundle.addons.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page-->
+    <!-- End plugin js for this page-->
+    <!-- inject:js -->
+    <script src="assets/js/shared/off-canvas.js"></script>
+    <script src="assets/js/shared/misc.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <script src="assets/js/demo_1/dashboard.js"></script>
+    <!-- End custom js for this page-->
+    <script src="assets/js/shared/jquery.cookie.js" type="text/javascript"></script>
+    <!-- new js file -->
+    <script src="script.js"></script>
+  </body>
+</html>
+
+
+
+      

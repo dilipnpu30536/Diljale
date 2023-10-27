@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha512-r22gChDnGvBylk90+2e/ycr3RVrDi8DIOkIGNhJlKfuyQM4tIRAI062MaV8sfjQKYVGjOBaZBOA87z+IhZE9DA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- This script tag imports the xlsx.full.min.js library which provides functions to read Excel files in JavaScript. -->
+    <style>
+         table, tr, td, th{
+      border: 1px solid black;
+      border-collapse: collapse;
+ 
+     }
+        table{
+      border: 1px solid black;
+     }
+    table {
+      border-collapse: collapse;
+      width: 20%;
+      margin: 10px auto;
+    }
+    th,td {
+      border: 1px solid black;
+      padding: 3px;
+      text-align: center;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+        tr {
+            background-color: f2f2f2;
+        }
+        /* This CSS selector sets the background color of every other row to light gray. */
+        
+        tr:nth-child(2n) {
+            background-color:  #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="printTable()">Print Table</button>
+    <label for="searchInput">Search: </label>
+    <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search">
+    <div class="table"></div>
+    <!-- This empty div will contain the HTML table generated from the Excel file. -->
+    <script>
+        let table = document.querySelector(".table");
+        // This line selects the empty div with the class "table" and stores it in the table variable.
+        (
+            async() => {
+                // This creates an anonymous async function that immediately executes.
+                let workbook = XLSX.read(await (await fetch("./FR Capital 09.10.2023.xlsx")).arrayBuffer());
+                // This line uses the fetch API to download the Excel file named "excel.xlsx" and reads it using the xlsx library.
+                // The result is stored in the workbook variable.
+                console.log(workbook);
+                // This logs the workbook object to the console for debugging purposes.
+                let worksheet = workbook.SheetNames;
+                // The SheetNames property of the workbook object returns an array of sheet names.
+                // Here, we are storing the sheet names in the worksheet variable.
+                worksheet.forEach(name => {
+                    // This is a forEach loop that iterates over each sheet name.
+                    let html = XLSX.utils.sheet_to_html(workbook.Sheets[name]);
+                    // This line converts the sheet data to HTML using the sheet_to_html() method provided by the xlsx library.
+                    // The result is stored in the html variable.
+
+                    table.innerHTML += `
+                    <h3>${name}</h3>${html}
+                    `;
+                    // This line appends the sheet name and its HTML representation to the table div using template literals.
+                })
+            }
+        )()
+        // This immediately invoked function expression (IIFE) executes the code inside it as soon as it is defined.
+        // Here, it contains an async function that reads the Excel file and generates an HTML table from each sheet.
+        function searchTable() {
+            const input = document.getElementById("searchInput");
+            const filter = input.value.toUpperCase();
+            const tables = document.querySelectorAll("table");
+            tables.forEach((table) => {
+                const rows = table.getElementsByTagName("tr");
+                for (let i = 4; i < rows.length; i++) {
+                    const row = rows[i];
+                    const cells = row.getElementsByTagName("td");
+                    for (let j = 0; j < cells.length; j++) {
+                        const cell = cells[j];
+                        if (cell) {
+                            const textValue = cell.textContent || cell.innerText;
+                            if (textValue.toUpperCase().indexOf(filter) > -1) {
+                                row.style.display = "";
+                                break;
+                            } else {
+                                row.style.display = "none";
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        function printTable() {
+          window.print();
+        }
+    </script>
+</body>
+</html>
